@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Roleta</title>
+  <style>
+    .roleta {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background-color: #f0f0f0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .setor {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      transform-origin: left center;
+      text-align: center;
+      font-size: 24px;
+    }
+
+    .setor:nth-child(odd) {
+      background-color: #f2f2f2;
+    }
+
+    .setor:nth-child(even) {
+      background-color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <div class="roleta">
+    <div class="setor">Prêmio 1</div>
+    <div class="setor">Prêmio 2</div>
+    <div class="setor">Prêmio 3</div>
+    </div>
+  <button onclick="girar()">Girar!</button>
+  <p id="resultado"></p>
+
+  <script>
+    const roleta = document.querySelector('.roleta');
+    const resultado = document.getElementById('resultado');
+
+    function girar() {
+      const numSetores = roleta.children.length;
+      const anguloAleatorio = Math.random() * 360 * numSetores;
+      roleta.style.transform = `rotate(${anguloAleatorio}deg)`;
+
+      const setorVencedor = Math.floor(anguloAleatorio / (360 / numSetores));
+      resultado.textContent = `Vencedor: ${roleta.children[setorVencedor].textContent}`;
+    }
+  </script>
+</body>
+</html>
